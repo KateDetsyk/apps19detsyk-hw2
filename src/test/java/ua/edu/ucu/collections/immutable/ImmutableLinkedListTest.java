@@ -54,6 +54,11 @@ public class ImmutableLinkedListTest {
         lst1 = lst1.add(4, 100);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddOnPositionError2() {
+        lst1 = lst1.add(-1, 100);
+    }
+
     @Test
     public void testAddAll() {
         Object[] addArr = new Object[]{4, 5, 6};
@@ -81,6 +86,12 @@ public class ImmutableLinkedListTest {
         lst2 = lst2.addAll(6, addArr);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddAllFromIndexError2() {
+        Object[] addArr = new Object[]{4, 5, 6};
+        lst2 = lst2.addAll(-1, addArr);
+    }
+
     @Test
     public void testGet() {
         Object expectedResult = "racoon";
@@ -96,8 +107,18 @@ public class ImmutableLinkedListTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetError2() {
+        lst2.get(-2);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveError() {
         lst2.remove(20);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveError2() {
+        lst2.remove(-20);
     }
 
     @Test
@@ -112,6 +133,11 @@ public class ImmutableLinkedListTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void testSetError() {
         lst2.set(20, 'k');
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSetError2() {
+        lst2.set(-2, 'k');
     }
 
     @Test
