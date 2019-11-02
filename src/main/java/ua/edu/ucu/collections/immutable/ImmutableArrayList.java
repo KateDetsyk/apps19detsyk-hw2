@@ -1,25 +1,54 @@
 package ua.edu.ucu.collections.immutable;
 
 
-public final class ImmutableArrayList implements ImmutableList{
+public final class ImmutableArrayList implements ImmutableList {
 
-    private Object[] array;
-    private int size;
+    private int size = 0;
+    private int capasity = 0;
+    private Object[] array = new Object[capasity];
 
-    public ImmutableArrayList(Object[] array) {
-        this.array = array;
-        this.size = size();
+    private void resize(ImmutableArrayList arr) {
+        if (arr.capasity == 0) {
+            arr.capasity = 1;
+        }
+        arr.capasity = arr.capasity*2;
+
+        Object[] oldArr = arr.array;
+        arr.array = new Object[arr.capasity];
+        arr.size = 0;
+        for (Object i: oldArr) {
+            arr.array[arr.size] = i;
+            arr.size = arr.size + 1;
+        }
+    }
+
+    private void copy(ImmutableArrayList arr) {
+        int index = 0;
+        for (Object i : array) {
+            if (index >= arr.capasity) {
+                resize(arr);
+            }
+            if (i == null) {
+                break;
+            }
+            arr.array[index] = i;
+            index++;
+            arr.size = arr.size + 1;
+        }
     }
 
     @Override
     public ImmutableArrayList add(Object e) {
-        int len = size + 1;
-        Object[] arr = new Object[len];
-        for (int i = 0; i < size; i++) {
-            arr[i] = array[i];
+        ImmutableArrayList arr = new ImmutableArrayList();
+        copy(arr);
+
+        if (arr.size >= arr.capasity) {
+            resize(arr);
         }
-        arr[--len] = e;
-        return new ImmutableArrayList(arr);
+        arr.array[arr.size] = e;
+        arr.size = arr.size + 1;
+
+        return arr;
     }
 
     @Override
@@ -27,45 +56,79 @@ public final class ImmutableArrayList implements ImmutableList{
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        Object[] arr = new Object[size];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = array[i];
+        ImmutableArrayList arr = new ImmutableArrayList();
+
+        int position = 0;
+        for (Object i : array) {
+            if (i == null) {
+                break;
+            }
+            if (position >= arr.capasity) {
+                resize(arr);
+            }
+            if (position == index) {
+                arr.array[position] = e;
+                position++;
+                arr.size = arr.size + 1;
+            }
+            if (position >= arr.capasity) {
+                resize(arr);
+            }
+            arr.array[position] = i;
+            position++;
+            arr.size = arr.size + 1;
         }
-        arr[index] = e;
-        return new ImmutableArrayList(arr);
+        return arr;
     }
 
     @Override
     public ImmutableArrayList addAll(Object[] c) {
-        int len = size + c.length;
-        Object[] arr = new Object[len];
-        int last = 0;
-        for (int i = 0; i < size; i++) {
-            arr[i] = array[i];
-            last++;
+        ImmutableArrayList arr = new ImmutableArrayList();
+        copy(arr);
+
+        for (Object aC : c) {
+            if (arr.size >= arr.capasity) {
+                resize(arr);
+            }
+            arr.array[arr.size] = aC;
+            arr.size = arr.size + 1;
         }
-        for (int i = 0; i < c.length; i++) {
-            arr[last] = array[i];
-            last++;
-        }
-        return new ImmutableArrayList(arr);
+        return arr;
     }
 
     @Override
     public ImmutableArrayList addAll(int index, Object[] c) {
-        if (index + c.length - 1 >= size) {
+        if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        Object[] arr = new Object[size];
-        int last = 0;
-        for (int i = 0; i < index; i++) {
-            arr[i] = array[i];
+        ImmutableArrayList arr = new ImmutableArrayList();
+        copy(arr);
+        int position = 0;
+        for (Object i : array) {
+            if (i == null) {
+                break;
+            }
+            if (position >= arr.capasity) {
+                resize(arr);
+            }
+            if (position == index) {
+                for (Object elem: c) {
+                    if (position >= arr.capasity) {
+                        resize(arr);
+                    }
+                    arr.array[position] = elem;
+                    position++;
+                    arr.size = arr.size + 1;
+                }
+            }
+            if (position >= arr.capasity) {
+                resize(arr);
+            }
+            arr.array[position] = i;
+            position++;
+            arr.size = arr.size + 1;
         }
-        for (int i = index; i < size; i++) {
-            arr[i] = c[last];
-            last++;
-        }
-        return new ImmutableArrayList(arr);
+        return arr;
     }
 
     @Override
@@ -81,16 +144,19 @@ public final class ImmutableArrayList implements ImmutableList{
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        int len = size - 1;
-        Object[] arr = new Object[len];
+        ImmutableArrayList arr = new ImmutableArrayList();
+
+        arr.capasity = capasity;
+        arr.array = new Object[capasity];
         int last = 0;
         for (int i = 0; i < size; i++) {
             if (i != index) {
-                arr[last] = array[i];
+                arr.array[last] = array[i];
                 last ++;
+                arr.size = arr.size + 1;
             }
         }
-        return new ImmutableArrayList(arr);
+        return arr;
     }
 
     @Override
@@ -98,22 +164,28 @@ public final class ImmutableArrayList implements ImmutableList{
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
-        Object[] arr = new Object[size];
+        ImmutableArrayList arr = new ImmutableArrayList();
+
         for (int i = 0; i < size; i++) {
-            if (i == index){
-                arr[i] = e;
+            if (i >= arr.capasity) {
+                resize(arr);
+            }
+            if (i == index) {
+                arr.array[i] = e;
+                arr.size = arr.size + 1;
                 continue;
             }
-            arr[i] = array[i];
+            arr.array[i] = array[i];
+            arr.size = arr.size + 1;
         }
-        return new ImmutableArrayList(arr);
+        return arr;
     }
 
     @Override
     public int indexOf(Object e) {
         int index = 0;
-        for (Object elem: array) {
-            if (elem == e) {
+        for (Object i: array) {
+            if (i == e) {
                 return index;
             }
             index++;
@@ -125,18 +197,18 @@ public final class ImmutableArrayList implements ImmutableList{
     public int size() {
         int len = 0;
 
-        if (array == null || array.length == 0) {
-            return len;
-        }
-        for (Object el: array) {
-            len ++;
+        for (Object i : array) {
+            if (i == null) {
+                break;
+            }
+            len++;
         }
         return len;
     }
 
     @Override
     public ImmutableArrayList clear() {
-        return new ImmutableArrayList(new Object[0]);
+        return new ImmutableArrayList();
     }
 
     @Override
@@ -146,20 +218,25 @@ public final class ImmutableArrayList implements ImmutableList{
 
     @Override
     public Object[] toArray() {
-        return array;
+        Object[] arr = new Object[size];
+
+        for (int i = 0; i < size; i++) {
+            arr[i] = array[i];
+        }
+        return arr;
     }
 
     @Override
     public String toString() {
-        String result = "";
-
-        for (int i = 0; i < size(); i++) {
-            if (i == size()-1) {
-                result = result + array[i];
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < size; ++i) {
+            if (i == size-1) {
+                buf.append(array[i]);
             } else {
-                result = result + array[i] + ", ";
+                buf.append(array[i]);
+                buf.append(", ");
             }
         }
-        return result;
+        return buf.toString();
     }
 }

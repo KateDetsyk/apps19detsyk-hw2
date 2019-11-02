@@ -1,215 +1,168 @@
 package ua.edu.ucu.collections.immutable;
 
+import org.junit.Before;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 public class ImmutableArrayListTest {
 
-    @Test
-    public void testAdd() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.add(4);
+    private ImmutableArrayList arr;
 
-        Object[] expResult = new Object[]{1, 2, 3, 4};
-        Object[] actualResult = newarraylist.toArray();
+    @Before
+    public void setUp() {
+        arr = new ImmutableArrayList();
 
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
+        arr = arr.add(1);
+        arr = arr.add(2);
+        arr = arr.add(3);
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddOnPositionError() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.add(8, 4);
+    @Test
+    public void testAdd() {
+        arr = arr.add(4);
+        arr = arr.add("cat");
+
+        Object[] expectedResult = {1, 2, 3, 4, "cat"};
+        Object[] actualResult = arr.toArray();
+
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testAddOnPosition() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.add(1, 4);
+        arr = arr.add(1, 500);
 
-        Object[] expResult = new Object[]{1, 4, 3};
-        Object[] actualResult = newarraylist.toArray();
+        Object[] expectedResult = {1, 500, 2, 3};
+        Object[] actualResult = arr.toArray();
 
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
+        assertArrayEquals(expectedResult, actualResult);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddOnPositionError() {
+        arr = arr.add(10, 500);
     }
 
     @Test
     public void testAddAll() {
-        Object[] arr = new Object[]{1, 2, 3};
-        Object[] addArr = new Object[]{1, 2, 3};
+        Object[] arrToAdd = {"cat", "fox", "raven"};
+        arr = arr.addAll(arrToAdd);
 
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.addAll(addArr);
+        Object[] expectedResult = {1, 2, 3, "cat", "fox", "raven"};
+        Object[] actualResult = arr.toArray();
 
-        Object[] expResult = new Object[]{1, 2, 3, 1, 2, 3};
-        Object[] actualResult = newarraylist.toArray();
-
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
-    public void testAddAllFromPosition() {
-        Object[] arr = new Object[]{1, 2, 3, 4};
-        Object[] addArr = new Object[]{1, 2, 3};
+    public void testAddAllOnPosition() {
+        Object[] arrToAdd = {"cat", "fox", "raven"};
+        arr = arr.addAll(1, arrToAdd);
 
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.addAll(1, addArr);
+        Object[] expectedResult = {1, "cat", "fox", "raven", 2, 3};
+        Object[] actualResult = arr.toArray();
 
-        Object[] expResult = new Object[]{1, 1, 2, 3};
-        Object[] actualResult = newarraylist.toArray();
-
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void testAddAllFromPositionError() {
-        Object[] arr = new Object[]{1, 2, 3};
-        Object[] addArr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.addAll(8, addArr);
+    public void testAddAllOnPositionError() {
+        Object[] arrToAdd = {"cat", "fox", "raven"};
+
+        arr = arr.addAll(10, arrToAdd);
     }
 
     @Test
     public void testGet() {
-        Object[] arr = new Object[]{1, 2, 3, 4};
+        Object expectedResult = 2;
+        Object actualResult = arr.get(1);
 
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-
-        int expResult = 2;
-        int actualResult = (int) arrayList.get(1);
-
-        assertEquals(expResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testGetError() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        int actualResult = (int) arrayList.get(10);
-    }
+        Object c = arr.get(3);
 
-    @Test
-    public void testRemove() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.remove(1);
-
-        Object[] expResult = new Object[]{1, 3};
-        Object[] actualResult = newarraylist.toArray();
-
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveError() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.remove(10);
+        arr.remove(10);
+    }
+
+    @Test
+    public void testRemove() {
+        arr = arr.remove(1);
+        Object[] expectedResult = {1, 3};
+        Object[] actualResult = arr.toArray();
+
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testSet() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.set(1 , 100);
+        arr = arr.set(1, 300);
+        Object[] expectedResult = {1, 300, 3};
+        Object[] actualResult = arr.toArray();
 
-        Object[] expResult = new Object[]{1, 100, 3};
-        Object[] actualResult = newarraylist.toArray();
-
-        assertArrayEquals(expResult, actualResult);
-        assertArrayEquals(arr, arrayList.toArray());
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void testSetError() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarraylist = arrayList.set(10, 100);
+        arr.set(10, "elem");
     }
 
     @Test
     public void testIndexOf() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
+        Object expectedResult = 1;
+        Object actualResult = arr.indexOf(2);
 
-        int expResult = 2;
-        int actualResult = arrayList.indexOf(3);
-        assertEquals(expResult, actualResult);
-
-        int expResult1 = -1;
-        int actualResult2 = arrayList.indexOf(10);
-        assertEquals(expResult1, actualResult2);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testSize() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
+        Object expectedResult = 3;
+        Object actualResult = arr.size();
 
-        int expResult = 3;
-        int actualResult = arrayList.size();
-        assertEquals(expResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testClear() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
-        ImmutableArrayList newarrayList = arrayList.clear();
+        arr = arr.clear();
+        Object[] expectedResult = {};
+        Object[] actualResult = arr.toArray();
 
-        Object[] expResult = new Object[]{};
-        Object[] actualResult = newarrayList.toArray();
-
-        assertArrayEquals(expResult, actualResult);
-
-        int expsize = 0;
-        int actualsize = newarrayList.size();
-
-        assertEquals(expsize, actualsize);
+        assertArrayEquals(expectedResult, actualResult);
+        assertTrue(arr.isEmpty());
     }
 
     @Test
     public void testIsEmpty() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
+        assertFalse(arr.isEmpty());
 
-        boolean expResult = false;
-        boolean actualResult = arrayList.isEmpty();
-        assertEquals(expResult, actualResult);
+        arr = arr.clear();
 
-        ImmutableArrayList newarrayList = arrayList.clear();
-        boolean expResult1 = true;
-        boolean actualResult1 = newarrayList.isEmpty();
-        assertEquals(expResult1, actualResult1);
+        assertTrue(arr.isEmpty());
     }
 
     @Test
     public void testToArray() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
+        Object[] expectedResult = {1, 2, 3};
+        Object[] actualResult = arr.toArray();
 
-        Object[] expResult = arr;
-        Object[] actualResult = arrayList.toArray();
-
-        assertArrayEquals(expResult, actualResult);
+        assertArrayEquals(expectedResult, actualResult);
     }
 
     @Test
     public void testToString() {
-        Object[] arr = new Object[]{1, 2, 3};
-        ImmutableArrayList arrayList = new ImmutableArrayList(arr);
+        String expectedResult = "1, 2, 3";
+        String actualResult = arr.toString();
 
-        String expResult = "1, 2, 3";
-        String actualResult = arrayList.toString();
-
-        assertEquals(expResult, actualResult);
+        assertEquals(expectedResult, actualResult);
     }
 }

@@ -1,11 +1,11 @@
 package ua.edu.ucu.collections.immutable;
 
-public final class ImmutableLinkedList implements ImmutableList{
+public final class ImmutableLinkedList implements ImmutableList {
 
     private Node first;
     private Node last;
 
-    private class Node {
+    private static class Node {
         private Object element;
         private Node next = null;
         private Node prev = null;
@@ -93,10 +93,10 @@ public final class ImmutableLinkedList implements ImmutableList{
         copy(lst);
 
         for (Object elem: c) {
-            Node add_node = new Node(elem);
-            lst.last.next = add_node;
-            add_node.prev = lst.last;
-            lst.last = add_node;
+            Node addNode = new Node(elem);
+            lst.last.next = addNode;
+            addNode.prev = lst.last;
+            lst.last = addNode;
         }
         return lst;
     }
@@ -159,25 +159,25 @@ public final class ImmutableLinkedList implements ImmutableList{
         }
         ImmutableLinkedList lst = new ImmutableLinkedList();
         copy(lst);
-        Node last_node = lst.first;
+        Node lastNode = lst.first;
         if (index == 0) {
             lst.first = lst.first.next;
             return lst;
         }
         if (index == size()-1) {
             for (int i = 0; i < size()-2; i++) {
-                last_node = last_node.next;
+                lastNode = lastNode.next;
             }
-            last_node.next = null;
-            lst.last = last_node;
+            lastNode.next = null;
+            lst.last = lastNode;
             return lst;
         }
         for (int i = 1; i < size(); i++) {
             if (i == index+1) {
-                last_node.prev.next = last_node.next;
-                last_node.next.prev = last_node.prev;
+                lastNode.prev.next = lastNode.next;
+                lastNode.next.prev = lastNode.prev;
             }
-            last_node = last_node.next;
+            lastNode = lastNode.next;
         }
         return lst;
     }
@@ -190,22 +190,22 @@ public final class ImmutableLinkedList implements ImmutableList{
         ImmutableLinkedList lst = new ImmutableLinkedList();
         copy(lst);
 
-        Node last_node = lst.first;
+        Node lastNode = lst.first;
 
-        Node new_node = new Node(e);
+        Node newNode = new Node(e);
         if (index == 0) {
             Node temp = lst.first;
-            lst.first = new_node;
-            new_node.next = temp.next;
+            lst.first = newNode;
+            newNode.next = temp.next;
 
         }
         for (int i = 1; i < size(); i++) {
             if (i == index) {
-                Node temp = last_node;
-                last_node = new_node;
-                new_node.next = temp.next;
+                Node temp = lastNode;
+                lastNode = newNode;
+                newNode.next = temp.next;
             }
-            last_node = last_node.next;
+            lastNode = lastNode.next;
         }
         return lst;
     }
@@ -266,17 +266,17 @@ public final class ImmutableLinkedList implements ImmutableList{
 
     @Override
     public String toString() {
-        String result = "";
         Object[] arr = toArray();
-
-        for (int i = 0; i < arr.length; i++) {
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < arr.length; ++i) {
             if (i == arr.length-1) {
-                result = result + arr[i];
+                buf.append(arr[i]);
             } else {
-                result = result + arr[i] + ", ";
+                buf.append(arr[i]);
+                buf.append(", ");
             }
         }
-        return result;
+        return buf.toString();
     }
 
     public ImmutableLinkedList addFirst(Object e) {
