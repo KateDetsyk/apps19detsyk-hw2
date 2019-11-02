@@ -22,7 +22,7 @@ public final class ImmutableArrayList implements ImmutableList {
         }
     }
 
-    private void copy(ImmutableArrayList arr) {
+    public void copy(ImmutableArrayList arr) {
         int index = 0;
         for (Object i : array) {
             if (index >= arr.capasity) {

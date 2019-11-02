@@ -165,4 +165,14 @@ public class ImmutableArrayListTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void testCopy() {
+        ImmutableArrayList newArray = new ImmutableArrayList();
+        arr.copy(newArray);
+
+        Object[] expectedResult = arr.toArray();
+        Object[] actualResult = newArray.toArray();
+        assertArrayEquals(expectedResult, actualResult);
+    }
 }
