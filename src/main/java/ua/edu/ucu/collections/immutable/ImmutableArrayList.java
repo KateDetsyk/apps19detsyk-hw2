@@ -22,7 +22,7 @@ public final class ImmutableArrayList implements ImmutableList {
         }
     }
 
-    public void copy(ImmutableArrayList arr) {
+    private void copy(ImmutableArrayList arr) {
         int index = 0;
         for (Object i : array) {
             if (index >= arr.capasity) {
@@ -53,7 +53,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableArrayList add(int index, Object e) {
-        if (index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableArrayList arr = new ImmutableArrayList();
@@ -98,7 +98,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableArrayList addAll(int index, Object[] c) {
-        if (index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableArrayList arr = new ImmutableArrayList();
@@ -133,7 +133,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         return array[index];
@@ -141,7 +141,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableArrayList remove(int index) {
-        if (index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableArrayList arr = new ImmutableArrayList();
@@ -161,7 +161,7 @@ public final class ImmutableArrayList implements ImmutableList {
 
     @Override
     public ImmutableArrayList set(int index, Object e) {
-        if (index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableArrayList arr = new ImmutableArrayList();

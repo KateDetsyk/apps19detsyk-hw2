@@ -58,7 +58,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableLinkedList add(int index, Object e) {
-        if (index >= size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         Node newNode = new Node(e);
@@ -103,7 +103,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableLinkedList addAll(int index, Object[] c) {
-        if (index >= size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableLinkedList lst = new ImmutableLinkedList();
@@ -142,7 +142,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public Object get(int index) {
-        if (index >= size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         Node element = first;
@@ -154,7 +154,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableLinkedList remove(int index) {
-        if (index >= size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableLinkedList lst = new ImmutableLinkedList();
@@ -184,7 +184,7 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public ImmutableLinkedList set(int index, Object e) {
-        if (index >= size()) {
+        if (index < 0 || index >= size()) {
             throw new IndexOutOfBoundsException();
         }
         ImmutableLinkedList lst = new ImmutableLinkedList();

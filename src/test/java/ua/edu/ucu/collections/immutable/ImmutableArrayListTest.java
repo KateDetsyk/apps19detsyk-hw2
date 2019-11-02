@@ -79,6 +79,10 @@ public class ImmutableArrayListTest {
         Object actualResult = arr.get(1);
 
         assertEquals(expectedResult, actualResult);
+
+        Object exp = -1;
+        Object act = arr.indexOf(1000);
+        assertEquals(exp, act);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -121,6 +125,11 @@ public class ImmutableArrayListTest {
         Object actualResult = arr.indexOf(2);
 
         assertEquals(expectedResult, actualResult);
+
+        Object exp = -1;
+        Object act = arr.indexOf(100);
+
+        assertEquals(exp, act);
     }
 
     @Test
@@ -164,15 +173,5 @@ public class ImmutableArrayListTest {
         String actualResult = arr.toString();
 
         assertEquals(expectedResult, actualResult);
-    }
-
-    @Test
-    public void testCopy() {
-        ImmutableArrayList newArray = new ImmutableArrayList();
-        arr.copy(newArray);
-
-        Object[] expectedResult = arr.toArray();
-        Object[] actualResult = newArray.toArray();
-        assertArrayEquals(expectedResult, actualResult);
     }
 }
