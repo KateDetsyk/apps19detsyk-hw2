@@ -4,10 +4,6 @@ import ua.edu.ucu.collections.immutable.ImmutableLinkedList;
 
 public class Stack {
 
-//    Object peek() - Returns the object from the top of the Stack without removing it
-//    Object pop() - Removes and returns the object from the top of the Stack
-//    void push(Object e) - Adds an object to the the top of the Stack
-
     private ImmutableLinkedList stack = new ImmutableLinkedList();
 
     public Object peek() {

@@ -7,7 +7,7 @@ public final class ImmutableArrayList implements ImmutableList {
     private int capasity = 0;
     private Object[] array = new Object[capasity];
 
-    private void resize(ImmutableArrayList arr) {
+    private static void resize(ImmutableArrayList arr) {
         if (arr.capasity == 0) {
             arr.capasity = 1;
         }
@@ -152,7 +152,7 @@ public final class ImmutableArrayList implements ImmutableList {
         for (int i = 0; i < size; i++) {
             if (i != index) {
                 arr.array[last] = array[i];
-                last ++;
+                last++;
                 arr.size = arr.size + 1;
             }
         }
