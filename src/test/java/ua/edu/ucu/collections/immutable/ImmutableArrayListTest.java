@@ -44,6 +44,11 @@ public class ImmutableArrayListTest {
         arr = arr.add(10, 500);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddOnPositionError2() {
+        arr = arr.add(-1, 500);
+    }
+
     @Test
     public void testAddAll() {
         Object[] arrToAdd = {"cat", "fox", "raven"};
@@ -73,6 +78,13 @@ public class ImmutableArrayListTest {
         arr = arr.addAll(10, arrToAdd);
     }
 
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testAddAllOnPositionError2() {
+        Object[] arrToAdd = {"cat", "fox", "raven"};
+
+        arr = arr.addAll(-1, arrToAdd);
+    }
+
     @Test
     public void testGet() {
         Object expectedResult = 2;
@@ -88,8 +100,19 @@ public class ImmutableArrayListTest {
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
+    public void testGetError2() {
+        Object c = arr.get(-1);
+
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testRemoveError() {
         arr.remove(10);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testRemoveError2() {
+        arr.remove(-1);
     }
 
     @Test
@@ -113,6 +136,11 @@ public class ImmutableArrayListTest {
     @Test(expected = IndexOutOfBoundsException.class)
     public void testSetError() {
         arr.set(10, "elem");
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSetError2() {
+        arr.set(-1, "elem");
     }
 
     @Test
