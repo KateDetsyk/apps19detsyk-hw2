@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8fa132d7-6fd4-4db4-bf8b-7a7472f6b21c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/ua/edu/ucu/collections/immutable/ImmutableArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ua/edu/ucu/collections/immutable/ImmutableArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ua/edu/ucu/collections/Dispatcher.class" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -209,20 +209,20 @@
               <item name="ImmutableCollections" type="b2602c69:ProjectViewProjectNode" />
               <item name="ImmutableCollections" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ImmutableCollections" type="b2602c69:ProjectViewProjectNode" />
               <item name="ImmutableCollections" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ImmutableCollections" type="b2602c69:ProjectViewProjectNode" />
               <item name="ImmutableCollections" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="test" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="collections" type="462c0819:PsiDirectoryNode" />
             </path>
@@ -231,6 +231,9 @@
               <item name="ImmutableCollections" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="test" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="collections" type="462c0819:PsiDirectoryNode" />
+              <item name="immutable" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -244,7 +247,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574060015738" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574060211889" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -261,7 +264,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Dispatcher">
+  <component name="RunManager" selected="JUnit.ImmutableArrayListTest">
     <configuration name="Dispatcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ua.edu.ucu.collections.Dispatcher" />
       <module name="ImmutableCollections" />
@@ -340,9 +343,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.ImmutableArrayListTest" />
         <item itemvalue="Application.Dispatcher" />
         <item itemvalue="JUnit.ImmutableLinkedListTest" />
-        <item itemvalue="JUnit.ImmutableArrayListTest" />
         <item itemvalue="JUnit.StackTest" />
         <item itemvalue="JUnit.QueueTest" />
       </list>
@@ -368,14 +371,11 @@
       <workItem from="1573679765753" duration="14000" />
       <workItem from="1573852521692" duration="1013000" />
       <workItem from="1573913813256" duration="629000" />
-      <workItem from="1574057306721" duration="2702000" />
+      <workItem from="1574057306721" duration="2898000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="ImmutableLinkedListTest - 2019.11.18 at 08h 15m 54s.xml">
-      <configuration name="ImmutableLinkedListTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="QueueTest - 2019.11.18 at 08h 15m 57s.xml">
       <configuration name="QueueTest" configurationId="JUnit" />
     </history-entry>
@@ -403,14 +403,17 @@
     <history-entry file="ImmutableLinkedListTest - 2019.11.18 at 08h 42m 22s.xml">
       <configuration name="ImmutableLinkedListTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="ImmutableArrayListTest - 2019.11.18 at 08h 56m 50s.xml">
+      <configuration name="ImmutableArrayListTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65817000" />
+    <option name="totallyTimeSpent" value="66013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="878" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49720672" visible="true" weight="0.2872483" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49720672" visible="true" weight="0.2872483" />
       <window_info id="Structure" order="1" sideWeight="0.5027933" side_tool="true" weight="0.26308724" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -419,7 +422,7 @@
       <window_info id="Favorites" order="6" sideWeight="0.5027933" side_tool="true" weight="0.26308724" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.1930295" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.1930295" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39944133" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
