@@ -1,6 +1,9 @@
 package ua.edu.ucu.collections.immutable;
 
 
+import java.util.Arrays;
+import java.util.Objects;
+
 public final class ImmutableArrayList implements ImmutableList {
 
     private int size = 0;
@@ -185,7 +188,7 @@ public final class ImmutableArrayList implements ImmutableList {
     public int indexOf(Object e) {
         int index = 0;
         for (Object i: array) {
-            if (i == e) {
+            if (i.equals(e)) {
                 return index;
             }
             index++;
@@ -238,5 +241,25 @@ public final class ImmutableArrayList implements ImmutableList {
             }
         }
         return buf.toString();
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ImmutableArrayList)) return false;
+        ImmutableArrayList arrayList = (ImmutableArrayList) o;
+        return size == arrayList.size &&
+                capasity == arrayList.capasity &&
+                Arrays.equals(array, arrayList.array);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(size, capasity);
+        result = 31 * result + Arrays.hashCode(array);
+        return result;
     }
 }

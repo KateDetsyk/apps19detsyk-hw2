@@ -1,5 +1,7 @@
 package ua.edu.ucu.collections.immutable;
 
+import java.util.Objects;
+
 public final class ImmutableLinkedList implements ImmutableList {
 
     private Node first;
@@ -213,7 +215,7 @@ public final class ImmutableLinkedList implements ImmutableList {
     @Override
     public int indexOf(Object e) {
         for (int i = 0; i < size(); i++) {
-            if (get(i) == e) {
+            if (get(i).equals(e)) {
                 return i;
             }
         }
@@ -310,6 +312,24 @@ public final class ImmutableLinkedList implements ImmutableList {
     public ImmutableLinkedList removeLast() {
         int index = size() - 1;
         return remove(index);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof ImmutableLinkedList)) {
+            return false;
+        }
+        ImmutableLinkedList that = (ImmutableLinkedList) o;
+        return Objects.equals(getFirst(), that.getFirst()) &&
+                Objects.equals(getLast(), that.getLast());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getFirst(), getLast());
     }
 }
 
