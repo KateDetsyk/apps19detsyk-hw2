@@ -253,8 +253,8 @@ public final class ImmutableArrayList implements ImmutableList {
             return false;
         }
         ImmutableArrayList arrayList = (ImmutableArrayList) o;
-        return size == arrayList.size &&
-                capasity == arrayList.capasity
+        return size == arrayList.size
+                && capasity == arrayList.capasity
                 && Arrays.equals(array, arrayList.array);
     }
 
