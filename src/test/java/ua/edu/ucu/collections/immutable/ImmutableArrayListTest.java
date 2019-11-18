@@ -193,4 +193,15 @@ public class ImmutableArrayListTest {
 
         assertEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void testEquals() {
+        ImmutableArrayList array = new ImmutableArrayList();
+
+        array = array.add(1);
+        array = array.add(2);
+        array = array.add(3);
+
+        assertEquals(array, arr);
+    }
 }

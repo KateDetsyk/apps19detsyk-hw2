@@ -249,11 +249,13 @@ public final class ImmutableArrayList implements ImmutableList {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof ImmutableArrayList)) return false;
+        if (!(o instanceof ImmutableArrayList)) {
+            return false;
+        }
         ImmutableArrayList arrayList = (ImmutableArrayList) o;
         return size == arrayList.size &&
-                capasity == arrayList.capasity &&
-                Arrays.equals(array, arrayList.array);
+                capasity == arrayList.capasity
+                && Arrays.equals(array, arrayList.array);
     }
 
     @Override

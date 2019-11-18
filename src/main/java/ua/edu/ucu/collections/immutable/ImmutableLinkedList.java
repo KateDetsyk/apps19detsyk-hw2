@@ -1,5 +1,6 @@
 package ua.edu.ucu.collections.immutable;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public final class ImmutableLinkedList implements ImmutableList {
@@ -316,15 +317,12 @@ public final class ImmutableLinkedList implements ImmutableList {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
         if (!(o instanceof ImmutableLinkedList)) {
             return false;
         }
+
         ImmutableLinkedList that = (ImmutableLinkedList) o;
-        return Objects.equals(getFirst(), that.getFirst()) &&
-                Objects.equals(getLast(), that.getLast());
+        return Arrays.equals(toArray(), that.toArray());
     }
 
     @Override

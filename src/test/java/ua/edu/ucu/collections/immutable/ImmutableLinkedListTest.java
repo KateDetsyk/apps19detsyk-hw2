@@ -265,4 +265,16 @@ public class ImmutableLinkedListTest {
 
         assertArrayEquals(expectedResult, actualResult);
     }
+
+    @Test
+    public void testEquals() {
+        assertNotEquals(lst1, lst2);
+
+        ImmutableLinkedList lst3 = new ImmutableLinkedList();
+        lst3 = lst3.add(1);
+        lst3 = lst3.add(2);
+        lst3 = lst3.add(3);
+
+        assertEquals(lst1, lst3);
+    }
 }
